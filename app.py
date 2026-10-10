@@ -19,7 +19,13 @@ from skill_analyzer import (
 from pdf_generator import generate_pdf
 from data import skills_database, roles
 load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+GEMINI_API_KEY = (
+    st.secrets.get("GEMINI_API_KEY")
+    if "GEMINI_API_KEY" in st.secrets
+    else os.getenv("GEMINI_API_KEY")
+)
+
 
 genai.configure(api_key=GEMINI_API_KEY)
 
